@@ -118,7 +118,6 @@ class CarlaCyberBridge(CyberNode):
         execution loop for synchronous mode
         """
         while not self.shutdown.is_set():
-            # self.log.info("in while loop")
             frame = self.carla_world.tick()
 
             world_snapshot = self.carla_world.get_snapshot()

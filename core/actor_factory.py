@@ -113,12 +113,6 @@ class ActorFactory(object):
         for actor_id in deleted_actors:
             self._destroy_object(actor_id, delete_actor=False)
 
-        # for actor_id in self.actors: 
-        #     if actor_id== self.world.player.id: 
-        #         ego_velocity = actor[actor_id].get_velocity()
-        #         ego_speed = 3.6 * math.sqrt(ego_velocity.x*2 + ego_velocity.y2 + ego_velocity.z*2)
-        #         self.log.info("Hiiiiiiii --- test-test ", actor_id, " ", actor[actor_id].get_speed_limit(), " ", ego_speed)
-
         # update objects for pseudo actors here as they might have an carla actor as parent ######
         with self.spawn_lock:
             while not self._task_queue.empty():

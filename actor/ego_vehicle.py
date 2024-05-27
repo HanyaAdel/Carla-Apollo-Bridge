@@ -11,6 +11,7 @@ Classes to handle Carla vehicles
 """
 import math
 
+import pandas as pd
 import numpy as np
 import carla
 from carla import VehicleControl, Location
@@ -221,7 +222,10 @@ class EgoVehicle(Vehicle):
 
         ego_velocity = self.carla_actor.get_velocity()
         ego_speed = 3.6 * math.sqrt(ego_velocity.x**2 + ego_velocity.y**2 + ego_velocity.z**2)
-        self.log.info(f"Vehicle ID: {self.uid}. Road Speed Limit: {self.carla_actor.get_speed_limit()}. Ego vehicle speed: {ego_speed}")
+        data = [["VehicleSpeedChanged", self.uid, ego_speed, self.carla_actor.get_speed_limit()]]
+        # self.log.info(f"Vehicle ID: {self.uid}. Road Speed Limit: {self.carla_actor.get_speed_limit()}. Ego vehicle speed: {ego_speed}")
+        data = pd.DataFrame(data)
+        data.to_csv("log.csv",mode = "a", index=False, header=False)
 
 
     def destroy(self):
